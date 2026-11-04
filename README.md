@@ -64,12 +64,12 @@ Atalho no VS Code: `Ctrl+Shift+B` roda o placar.
 
 ## 📦 Entrega
 
-- **Prazo:** [DEFINIR DATA E HORA]
+- **Prazo:** 08/11/2026 às 23:59
 - **Repositório:** `lpp-quest-SUA_MATRICULA`, na **sua** conta do GitHub, [DEFINIR: privado ou público]. Se for privado, adicione **juniorbsn-ui** como colaborador (*Settings → Collaborators*).
-- **URL:** informe a URL do repositório e a sua matrícula em [DEFINIR LOCAL].
+- **URL:** informe a URL do repositório na atividade aberta no Classroom.
 - **Vale o último commit até o prazo.** Faça commits ao longo da jornada.
 - **Nota:** 1 ponto, proporcional ao seu XP nos testes oficiais (por exemplo, 120 de 240 XP valem 0,50).
-- **Dúvidas:** [DEFINIR CANAL DA TURMA]
+- **Dúvidas:** através do e-mail do professor ou em sala de aula.
 
 ## 🧰 O que tem aqui
 
@@ -79,7 +79,7 @@ Atalho no VS Code: `Ctrl+Shift+B` roda o placar.
 | `quest.py` | o placar do jogo (roda os testes, calcula o XP e atualiza o mapa) |
 | `PROGRESSO.md` | o seu progresso (atualizado pelo placar) |
 | `PREPARAR_AMBIENTE.md` | instalação para Windows, Mac e Linux |
-| `tools/` | motor do jogo (não edite) |
+| `tools/` | motor do jogo (não edite) |  
 | `.github/workflows/quest.yml` | roda o placar no GitHub a cada push (aba **Actions**) |
 
 Boa jornada! 🏰
