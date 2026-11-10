@@ -11,30 +11,46 @@ LIMITE_MIN = -40
 LIMITE_MAX = 85
 
 
+def _valida(leitura):
+    """True se a leitura é um número dentro do intervalo -40..85."""
+    return (isinstance(leitura, (int, float)) and not isinstance(leitura, bool)
+            and LIMITE_MIN <= leitura <= LIMITE_MAX)
+
+
 # ============================================================ MISSÃO 5.1 — Recursão: o básico
 # Receita da recursão:  (1) caso base: a lista vazia tem resposta direta;
 #                       (2) passo: resolva o primeiro item e deixe o RESTO (valores[1:]) para a própria função.
 def somar(valores):
     """Soma dos valores, recursivamente. Lista vazia: 0.   somar([1, 2, 3]) -> 6"""
-    raise NotImplementedError
+    if not valores:
+        return 0
+    return valores[0] + somar(valores[1:])
 
 
 def contar(valores, predicado):
     """Quantos valores satisfazem o predicado (função que devolve True/False), recursivamente.
     contar([1, 5, 9], lambda x: x > 4) -> 2
     """
-    raise NotImplementedError
+    if not valores:
+        return 0
+    return (1 if predicado(valores[0]) else 0) + contar(valores[1:], predicado)
 
 
 def maximo(valores):
     """Maior valor, recursivamente. Lista vazia: None."""
-    raise NotImplementedError
+    if not valores:
+        return None
+    resto = maximo(valores[1:])
+    return valores[0] if resto is None or valores[0] > resto else resto
 
 
 # ============================================================ MISSÃO 5.2 — Limpar e janelas
 def limpar(leituras):
     """Lista NOVA só com as leituras válidas (nem None, nem fora do intervalo -40..85), na mesma ordem."""
-    raise NotImplementedError
+    if not leituras:
+        return []
+    primeiro = [leituras[0]] if _valida(leituras[0]) else []
+    return primeiro + limpar(leituras[1:])
 
 
 def media_movel(valores, janela):
@@ -42,7 +58,8 @@ def media_movel(valores, janela):
     media_movel([1, 2, 3, 4], 2) -> [1.5, 2.5, 3.5]
     Lista menor que a janela: []. Dica: comprehension com fatias valores[i:i + janela].
     """
-    raise NotImplementedError
+    return [round(somar(valores[i:i + janela]) / janela, 2)
+            for i in range(len(valores) - janela + 1)]
 
 
 # ============================================================ MISSÃO 5.3 — Alertas e o painel final
@@ -51,7 +68,7 @@ def detectar_alertas(leituras, limite):
 
     Dica: enumerate(leituras) dá (indice, valor); filtre com uma comprehension.
     """
-    raise NotImplementedError
+    return [{"indice": i, "valor": v} for i, v in enumerate(leituras) if _valida(v) and v > limite]
 
 
 def resumo_sensores(sensores, limite):
@@ -60,4 +77,12 @@ def resumo_sensores(sensores, limite):
 
     Use limpar, detectar_alertas e as funções anteriores. Sem laços e sem alterar a entrada!
     """
-    raise NotImplementedError
+    def resumir(leituras):
+        validas = limpar(leituras)
+        return {
+            "validas": len(validas),
+            "media": round(somar(validas) / len(validas), 2) if validas else 0.0,
+            "alertas": len(detectar_alertas(leituras, limite)),
+        }
+
+    return {nome: resumir(leituras) for nome, leituras in sensores.items()}
